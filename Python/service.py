@@ -93,10 +93,10 @@ class GameService:
         """
         user = self.get_user(tg_user)
 
-        if user.telegram_id == tg_user.id:
+        if invite_code == tg_user.id:
             return "Вы не можете указать свой код"
         inviter = (
-            self.session.query(User).filter(User.inviter_id == invite_code).first()
+            self.session.query(User).filter(User.telegram_id == invite_code).first()
         )
         if not inviter:
             return "Указаный код не найден"
